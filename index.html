@@ -34,44 +34,10 @@
             padding-bottom: 3rem;
         }
 
-        /* Top Bar & Header - Zmenšeno pro kompaktnější vzhled */
-        header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
-            color: white;
-            padding: 1.25rem 1rem 2rem;
-            position: relative;
-        }
-
-        .header-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .logo-title h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-title p {
-            color: #94a3b8;
-            font-size: 0.875rem;
-            margin-top: 0.1rem;
-        }
-
-        /* Admin Controls Bar */
         .admin-controls-bar {
             background: #0f172a;
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1rem;
             border-bottom: 1px solid #334155;
             display: flex;
             justify-content: space-between;
@@ -101,12 +67,37 @@
             display: flex;
             gap: 0.5rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
-        /* Main Container Layout */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            color: white;
+            padding: 1.25rem 1rem 1.75rem;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .logo-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-title p {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-top: 0.1rem;
+        }
+
         .main-container {
             max-width: 1100px;
-            margin: -1.25rem auto 0;
+            margin: 1.5rem auto 0;
             padding: 0 1rem;
             display: grid;
             grid-template-columns: 1.8fr 1.2fr;
@@ -119,11 +110,51 @@
             }
         }
 
-        /* Cards & Components */
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: #e2e8f0;
+            color: var(--text-dark);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #cbd5e1;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         .card {
             background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border-color);
             padding: 1.5rem;
             margin-bottom: 1.5rem;
@@ -136,6 +167,8 @@
             border-bottom: 2px solid var(--bg-body);
             padding-bottom: 0.75rem;
             margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .card-title {
@@ -147,7 +180,6 @@
             gap: 0.5rem;
         }
 
-        /* Noticeboard Filters & Search */
         .noticeboard-tools {
             display: flex;
             gap: 0.5rem;
@@ -194,23 +226,15 @@
             border-color: var(--primary-color);
         }
 
-        /* Notice Cards */
         .notice-card {
             border-left: 4px solid var(--primary-light);
             background: #ffffff;
             border-radius: 8px;
-            border-top: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
+            border: 1px solid var(--border-color);
+            border-left-width: 4px;
             padding: 1.2rem;
             margin-bottom: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
-        }
-
-        .notice-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px -2px rgba(0,0,0,0.08);
         }
 
         .notice-card.pinned {
@@ -251,6 +275,7 @@
             margin-bottom: 0.8rem;
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .notice-body {
@@ -268,7 +293,6 @@
             justify-content: flex-end;
         }
 
-        /* Buttons & Forms */
         .btn {
             background: var(--primary-color);
             color: white;
@@ -287,12 +311,9 @@
         .btn:hover { background: #1d4ed8; }
         .btn-sm { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
         .btn-danger { background: var(--danger); }
-        .btn-danger:hover { background: #dc2626; }
         .btn-secondary { background: #64748b; }
-        .btn-secondary:hover { background: #475569; }
         .btn-outline { background: transparent; border: 1px solid currentColor; color: inherit; }
 
-        /* Modal styling */
         .modal {
             display: none;
             position: fixed;
@@ -316,31 +337,11 @@
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
         }
 
-        .form-group {
-            margin-bottom: 1rem;
-        }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 0.6rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.95rem; }
+        textarea.form-control { min-height: 120px; resize: vertical; }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.6rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 0.95rem;
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        /* Contacts List Styling */
         .contact-box {
             background: #f8fafc;
             border: 1px solid var(--border-color);
@@ -349,33 +350,11 @@
             margin-bottom: 0.8rem;
         }
 
-        .contact-box .name {
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 1rem;
-        }
-
-        .contact-box .role {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-box .phone {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #0f172a;
-        }
-
-        .contact-box .phone a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .contact-box .phone a:hover {
-            color: var(--primary-light);
-            text-decoration: underline;
-        }
+        .contact-box .name { font-weight: 700; color: var(--primary-color); font-size: 1rem; }
+        .contact-box .role { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .contact-box .phone { font-size: 0.95rem; font-weight: 600; color: #0f172a; }
+        .contact-box .phone a { color: inherit; text-decoration: none; }
+        .contact-box .phone a:hover { color: var(--primary-light); text-decoration: underline; }
 
         .official-contacts {
             background: #eff6ff;
@@ -385,21 +364,13 @@
             margin-bottom: 1.2rem;
         }
 
-        .official-contacts p {
-            margin-bottom: 0.4rem;
-            font-size: 0.95rem;
-        }
-
-        .official-contacts p:last-child {
-            margin-bottom: 0;
-        }
+        .official-contacts p { margin-bottom: 0.4rem; font-size: 0.95rem; }
 
         .section-subtitle {
             font-size: 0.95rem;
             font-weight: 700;
             color: var(--text-dark);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             margin: 1.2rem 0 0.6rem 0;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.3rem;
@@ -412,21 +383,35 @@
             padding: 0.5rem 0;
             border-bottom: 1px dashed var(--border-color);
         }
-
-        .emergency-item:last-child {
-            border-bottom: none;
-        }
+        .emergency-item:last-child { border-bottom: none; }
 
         .emergency-item i {
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             border-radius: 50%;
             background: #eff6ff;
             color: var(--primary-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .protected-screen {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .protected-screen i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .stanovy-content {
+            white-space: pre-line;
+            line-height: 1.8;
+            color: #334155;
+            font-size: 0.95rem;
         }
 
         .empty-state {
@@ -438,7 +423,6 @@
 </head>
 <body>
 
-    <!-- Admin Status Header Bar -->
     <div class="admin-controls-bar">
         <div class="admin-status">
             <div class="status-indicator" id="statusDot"></div>
@@ -449,16 +433,16 @@
                 <i class="fa-solid fa-lock"></i> Přihlášení správce
             </button>
             <div id="adminTools" style="display: none; gap: 0.5rem;">
-                <button class="btn btn-sm btn-outline" onclick="openNoticeModal()" title="Přidat aktualitu">
+                <button class="btn btn-sm btn-outline" onclick="openNoticeModal()">
                     <i class="fa-solid fa-plus"></i> Nová zpráva
                 </button>
-                <button class="btn btn-sm btn-outline" onclick="exportData()" title="Zálohovat všechna data do souboru">
+                <button class="btn btn-sm btn-outline" onclick="exportData()">
                     <i class="fa-solid fa-download"></i> Záloha
                 </button>
-                <button class="btn btn-sm btn-outline" onclick="importDataTrigger()" title="Obnovit ze zálohy">
+                <button class="btn btn-sm btn-outline" onclick="importDataTrigger()">
                     <i class="fa-solid fa-upload"></i> Obnovit
                 </button>
-                <button class="btn btn-sm btn-outline" onclick="changePassword()" title="Změnit heslo správce">
+                <button class="btn btn-sm btn-outline" onclick="changePassword()">
                     <i class="fa-solid fa-key"></i> Heslo
                 </button>
                 <input type="file" id="importFileInput" style="display:none;" onchange="importData(event)">
@@ -466,7 +450,6 @@
         </div>
     </div>
 
-    <!-- Main Header -->
     <header>
         <div class="header-container">
             <div class="logo-title">
@@ -476,85 +459,617 @@
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <div class="main-container">
-        
-        <!-- Left Column: Noticeboard / Aktuality -->
         <main>
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title"><i class="fa-solid fa-bullhorn"></i> Aktuality a Oznámení</h2>
-                </div>
+            <div class="nav-tabs">
+                <button class="tab-btn active" id="tabBtnAktuali" onclick="switchTab('aktuality')">
+                    <i class="fa-solid fa-bullhorn"></i> Aktuality
+                </button>
+                <button class="tab-btn" id="tabBtnStanovy" onclick="switchTab('stanovy')">
+                    <i class="fa-solid fa-file-contract"></i> Stanovy
+                </button>
+            </div>
 
-                <!-- Filters and Search -->
-                <div class="noticeboard-tools">
-                    <div class="search-box">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="searchInput" placeholder="Hledat v oznámeních..." oninput="renderNotices()">
+            <div class="tab-content active" id="tabAktuality">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-bullhorn"></i> Aktuality a Oznámení</h2>
                     </div>
-                    <button class="filter-btn active" onclick="setFilter('all', this)">Vše</button>
-                    <button class="filter-btn" onclick="setFilter('Havárie/Odstávka', this)">Odstávky</button>
-                    <button class="filter-btn" onclick="setFilter('Důležité', this)">Důležité</button>
-                    <button class="filter-btn" onclick="setFilter('Plánované práce', this)">Práce</button>
-                </div>
 
-                <!-- Notices Container -->
-                <div id="noticesContainer">
-                    <!-- Dynamic rendering -->
+                    <div class="noticeboard-tools">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="searchInput" placeholder="Hledat v oznámeních..." oninput="renderNotices()">
+                        </div>
+                        <button class="filter-btn active" onclick="setFilter('all', this)">Vše</button>
+                        <button class="filter-btn" onclick="setFilter('Havárie/Odstávka', this)">Odstávky</button>
+                        <button class="filter-btn" onclick="setFilter('Důležité', this)">Důležité</button>
+                        <button class="filter-btn" onclick="setFilter('Plánované práce', this)">Práce</button>
+                    </div>
+
+                    <div id="noticesContainer"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tabStanovy">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-file-contract"></i> Stanovy společenství</h2>
+                        <div id="stanovyAdminTools" style="display: none;">
+                            <button class="btn btn-sm btn-secondary" onclick="openStanovyEdit()"><i class="fa-solid fa-pen"></i> Upravit stanovy</button>
+                        </div>
+                    </div>
+
+                    <div id="stanovyGate" class="protected-screen">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">Přístup k dokumentům je chráněn</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Pro zobrazení Stanov zadejte přístupové heslo.</p>
+                        
+                        <form onsubmit="unlockStanovy(event)" style="max-width: 320px; margin: 0 auto;">
+                            <div class="form-group">
+                                <input type="password" id="stanovyPassInput" class="form-control" placeholder="Zadejte heslo (stanovy)" required style="text-align: center;">
+                            </div>
+                            <button type="submit" class="btn" style="width: 100%; justify-content: center;">
+                                <i class="fa-solid fa-key"></i> Odemknout Stanovy
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="stanovyView" style="display: none;">
+                        <div class="stanovy-content" id="stanovyTextContainer"></div>
+                    </div>
                 </div>
             </div>
         </main>
 
-        <!-- Right Column: Sidebar Contacts -->
         <aside>
-            <!-- Official Org Contacts -->
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title"><i class="fa-solid fa-address-book"></i> Kontakty vedení</h2>
                 </div>
 
                 <div class="official-contacts">
-                    <p><strong><i class="fa-regular fa-envelope"></i> Email:</strong> <a href="mailto:bytyjichova@seznam.cz" style="color:#0284c7; font-weight:600;">bytyjichova@seznam.cz</a>[cite: 2]</p>
-                    <p><strong><i class="fa-solid fa-box-archive"></i> Datová schránka:</strong> <code style="background:#fff; padding:2px 6px; border-radius:4px; font-weight:bold; color:#1e3a8a;">r6hvbnt</code>[cite: 2]</p>
+                    <p><strong><i class="fa-regular fa-envelope"></i> Email:</strong> <a href="mailto:bytyjichova@seznam.cz" style="color:#0284c7; font-weight:600;">bytyjichova@seznam.cz</a>[cite: 1]</p>
+                    <p><strong><i class="fa-solid fa-box-archive"></i> Datová schránka:</strong> <code style="background:#fff; padding:2px 6px; border-radius:4px; font-weight:bold; color:#1e3a8a;">r6hvbnt</code>[cite: 1]</p>
                 </div>
 
-                <!-- Představenstvo -->
                 <div class="section-subtitle"><i class="fa-solid fa-users"></i> Představenstvo</div>
 
                 <div class="contact-box">
                     <div class="name">Ing. Iva Rangotisová</div>
                     <div class="role">předsedkyně představenstva</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:602322146">602 322 146</a>[cite: 2]</div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:602322146">602 322 146</a>[cite: 1]</div>
                 </div>
 
                 <div class="contact-box">
                     <div class="name">Olga Tajmrová</div>
                     <div class="role">místopředseda představenstva</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:773210264">773 210 264</a>[cite: 2]</div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:773210264">773 210 264</a>[cite: 1]</div>
                 </div>
 
                 <div class="contact-box">
                     <div class="name">Pavel Rybka</div>
                     <div class="role">člen představenstva</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:603445802">603 445 802</a>[cite: 2]</div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:603445802">603 445 802</a>[cite: 1]</div>
                 </div>
 
-                <!-- Kontrolní komise -->
                 <div class="section-subtitle"><i class="fa-solid fa-clipboard-check"></i> Kontrolní komise</div>
 
                 <div class="contact-box">
                     <div class="name">Eva Ptáčková</div>
                     <div class="role">předsedkyně kontrolní komise</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:724222206">724 222 206</a>[cite: 2]</div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:724222206">724 222 206</a>[cite: 1]</div>
                 </div>
 
                 <div class="contact-box">
                     <div class="name">Vojtěch Mareš</div>
                     <div class="role">místopředseda kontrolní komise</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:608939382">608 939 382</a>[cite: 2]</div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:608939382">608 939 382</a>[cite: 1]</div>
                 </div>
 
                 <div class="contact-box">
                     <div class="name">Petr Sochůrek</div>
                     <div class="role">člen kontrolní komise</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:608815493">608 815 493</a>[cite: 2]</div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:608815493">608 815 493</a>[cite: 1]</div>
+                </div>
+            </div>
+
+            <!-- Havarijní služby pouze s Elektřinou a Vodou -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Havarijní služby</h2>
+                </div>
+                <div class="emergency-item">
+                    <i class="fa-solid fa-bolt"></i>
+                    <div>
+                        <strong>Elektřina (Pohotovost)</strong>
+                        <p style="font-size:0.85rem; color:var(--text-muted)">800 850 860</p>
+                    </div>
+                </div>
+                <div class="emergency-item">
+                    <i class="fa-solid fa-droplet"></i>
+                    <div>
+                        <strong>Voda a Kanalizace</strong>
+                        <p style="font-size:0.85rem; color:var(--text-muted)">840 111 112</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <div class="modal" id="noticeModal">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 1rem;" id="modalTitle">Nové oznámení</h3>
+            <form id="noticeForm" onsubmit="saveNotice(event)">
+                <input type="hidden" id="noticeId">
+                <div class="form-group">
+                    <label>Název oznámení</label>
+                    <input type="text" id="noticeTitle" class="form-control" required placeholder="Např. Odstávka teplé vody">
+                </div>
+                <div class="form-group">
+                    <label>Kategorie</label>
+                    <select id="noticeCategory" class="form-control">
+                        <option value="Informace">Informace</option>
+                        <option value="Důležité">Důležité</option>
+                        <option value="Havárie/Odstávka">Havárie/Odstávka</option>
+                        <option value="Plánované práce">Plánované práce</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Platnost do (datum události)</label>
+                    <input type="date" id="noticeExpiry" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Obsah zprávy</label>
+                    <textarea id="noticeBody" class="form-control" required placeholder="Zadejte podrobný text zprávy..."></textarea>
+                </div>
+                <div class="form-group" style="display: flex; gap: 0.5rem; align-items: center;">
+                    <input type="checkbox" id="noticePinned">
+                    <label for="noticePinned" style="margin: 0; cursor: pointer;">Přednostní zpráva (připnout nahoru)</label>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeNoticeModal()">Zrušit</button>
+                    <button type="submit" class="btn">Uložit a publikovat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="stanovyModal">
+        <div class="modal-content" style="max-width: 750px;">
+            <h3 style="margin-bottom: 1rem;">Upravit text Stanov</h3>
+            <form onsubmit="saveStanovyEdit(event)">
+                <div class="form-group">
+                    <label>Text Stanov</label>
+                    <textarea id="stanovyEditTextarea" class="form-control" style="min-height: 350px; font-family: monospace; font-size: 0.9rem;" required></textarea>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="resetStanovyDefault()">Obnovit výchozí text</button>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button type="button" class="btn btn-secondary" onclick="closeStanovyModal()">Zrušit</button>
+                        <button type="submit" class="btn">Uložit Stanovy</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        window.isAdmin = false;
+        window.isStanovyUnlocked = false;
+        window.currentFilter = 'all';
+        window.inactivityTimer = null;
+
+        const defaultStanovyText = "STANOVY SPOLEČENSTVÍ VLASTNÍKŮ JÍCHOVA\n\nČLÁNEK I – ZÁKLADNÍ USTANOVENÍ\n1. Společenství vlastníků jednotek je právnická osoba založená za účelem zajišťování správy domu a pozemku.\n2. Společenství je způsobilé nabývat práva a zavazovat se k povinnostem.\n\nČLÁNEK II – PRÁVA A POVINNOSTI VLASTNÍKA JEDNOTKY\n1. Vlastník jednotky má právo užívat společné prostory domu.\n2. Vlastník je povinen udržovat svou jednotku v řádném stavu.\n3. Vlastník je povinen hradit stanovené příspěvky na správu domu včas.\n\nČLÁNEK III – ORGÁNY SPOLEČENSTVÍ\n1. Nejvyšším orgánem společenství je Shromáždění vlastníků.\n2. Statutárním orgánem je Představenstvo.\n3. Kontrolním orgánem je Kontrolní komise.";
+
+        const defaultNotices = [
+            {
+                id: "1",
+                title: "Odstávka teplé vody a topení",
+                category: "Havárie/Odstávka",
+                date: "24. 10. 2026",
+                expiryDate: "",
+                body: "Z důvodu plánované opravy teplovodu dojde ve čtvrtek od 8:00 do 16:00 k odstávce teplé vody.\n\nDěkujeme za pochopení.",
+                pinned: true
+            },
+            {
+                id: "2",
+                title: "Čištění garáží a společných prostor",
+                category: "Plánované práce",
+                date: "15. 10. 2026",
+                expiryDate: "",
+                body: "Prosíme všechny vlastníky vozidel, aby v sobotu přeparkovali svá vozidla z podzemních garáží.",
+                pinned: false
+            }
+        ];
+
+        window.escapeHtml = function(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        };
+
+        window.getNotices = function() {
+            try {
+                return JSON.parse(localStorage.getItem('byty_jichova_notices') || '[]');
+            } catch (e) {
+                return [];
+            }
+        };
+
+        window.checkAndCleanupExpiredNotices = function() {
+            try {
+                let notices = window.getNotices();
+                const todayStr = new Date().toISOString().slice(0, 10);
+                const filteredNotices = notices.filter(n => {
+                    if (!n.expiryDate) return true;
+                    return n.expiryDate >= todayStr;
+                });
+                if (filteredNotices.length !== notices.length) {
+                    localStorage.setItem('byty_jichova_notices', JSON.stringify(filteredNotices));
+                }
+            } catch (e) {}
+        };
+
+        window.switchTab = function(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            if (tabName === 'aktuality') {
+                const btn = document.getElementById('tabBtnAktuali');
+                const content = document.getElementById('tabAktuality');
+                if (btn) btn.classList.add('active');
+                if (content) content.classList.add('active');
+            } else if (tabName === 'stanovy') {
+                const btn = document.getElementById('tabBtnStanovy');
+                const content = document.getElementById('tabStanovy');
+                if (btn) btn.classList.add('active');
+                if (content) content.classList.add('active');
+            }
+        };
+
+        window.unlockStanovy = function(e) {
+            e.preventDefault();
+            const input = document.getElementById('stanovyPassInput');
+            if (input && input.value === "stanovy") {
+                window.isStanovyUnlocked = true;
+                const gate = document.getElementById('stanovyGate');
+                const view = document.getElementById('stanovyView');
+                if (gate) gate.style.display = 'none';
+                if (view) view.style.display = 'block';
+                window.renderStanovyText();
+            } else {
+                alert("Nesprávné heslo pro přístup ke Stanovám!");
+            }
+        };
+
+        window.renderStanovyText = function() {
+            try {
+                const text = localStorage.getItem('byty_jichova_stanovy_text') || defaultStanovyText;
+                const container = document.getElementById('stanovyTextContainer');
+                if (container) container.innerText = text;
+            } catch (e) {}
+        };
+
+        window.openStanovyEdit = function() {
+            if (!window.isAdmin) return;
+            const currentText = localStorage.getItem('byty_jichova_stanovy_text') || defaultStanovyText;
+            const textarea = document.getElementById('stanovyEditTextarea');
+            const modal = document.getElementById('stanovyModal');
+            if (textarea) textarea.value = currentText;
+            if (modal) modal.classList.add('active');
+        };
+
+        window.closeStanovyModal = function() {
+            const modal = document.getElementById('stanovyModal');
+            if (modal) modal.classList.remove('active');
+        };
+
+        window.saveStanovyEdit = function(e) {
+            e.preventDefault();
+            const textarea = document.getElementById('stanovyEditTextarea');
+            if (textarea) {
+                localStorage.setItem('byty_jichova_stanovy_text', textarea.value);
+                window.renderStanovyText();
+                window.closeStanovyModal();
+                alert("Stanovy byly úspěšně aktualizovány.");
+            }
+        };
+
+        window.resetStanovyDefault = function() {
+            if (confirm("Opravdu chcete vrátit text Stanov do původního nastavení?")) {
+                localStorage.setItem('byty_jichova_stanovy_text', defaultStanovyText);
+                const textarea = document.getElementById('stanovyEditTextarea');
+                if (textarea) textarea.value = defaultStanovyText;
+                window.renderStanovyText();
+                window.closeStanovyModal();
+            }
+        };
+
+        window.toggleAuth = function() {
+            if (window.isAdmin) {
+                window.logout();
+            } else {
+                const pass = prompt("Zadejte přístupové heslo pro úpravu stránek:");
+                if (!pass) return;
+                
+                const storedPass = localStorage.getItem('byty_jichova_pass') || "admin123";
+                if (pass === storedPass) {
+                    window.isAdmin = true;
+                    window.updateAdminUI();
+                    window.resetInactivityTimer();
+                    alert("Byli jste úspěšně přihlášeni jako správce.");
+                } else {
+                    alert("Nesprávné heslo! Přístup odepřen.");
+                }
+            }
+        };
+
+        window.logout = function() {
+            window.isAdmin = false;
+            clearTimeout(window.inactivityTimer);
+            window.updateAdminUI();
+            alert("Byli jste odhlášeni.");
+        };
+
+        window.updateAdminUI = function() {
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const authBtn = document.getElementById('authBtn');
+            const adminTools = document.getElementById('adminTools');
+            const stanovyAdminTools = document.getElementById('stanovyAdminTools');
+
+            if (window.isAdmin) {
+                if (statusDot) statusDot.classList.add('active');
+                if (statusText) statusText.innerText = 'Správce přihlášen';
+                if (authBtn) authBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Odhlásit se';
+                if (adminTools) adminTools.style.display = 'flex';
+                if (stanovyAdminTools) stanovyAdminTools.style.display = 'block';
+            } else {
+                if (statusDot) statusDot.classList.remove('active');
+                if (statusText) statusText.innerText = 'Režim pro veřejnost';
+                if (authBtn) authBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Přihlášení správce';
+                if (adminTools) adminTools.style.display = 'none';
+                if (stanovyAdminTools) stanovyAdminTools.style.display = 'none';
+            }
+            window.renderNotices();
+        };
+
+        window.resetInactivityTimer = function() {
+            if (!window.isAdmin) return;
+            clearTimeout(window.inactivityTimer);
+            window.inactivityTimer = setTimeout(() => {
+                alert("Byli jste automaticky odhlášeni z důvodu neaktivity.");
+                window.logout();
+            }, 15 * 60 * 1000);
+        };
+
+        document.addEventListener('mousemove', () => window.resetInactivityTimer());
+        document.addEventListener('keypress', () => window.resetInactivityTimer());
+
+        window.changePassword = function() {
+            if (!window.isAdmin) return;
+            const newPass = prompt("Zadejte nové přístupové heslo správce:");
+            if (newPass && newPass.trim() !== "") {
+                localStorage.setItem('byty_jichova_pass', newPass.trim());
+                alert("Heslo bylo úspěšně změněno.");
+            }
+        };
+
+        window.setFilter = function(cat, btn) {
+            window.currentFilter = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            window.renderNotices();
+        };
+
+        window.renderNotices = function() {
+            try {
+                window.checkAndCleanupExpiredNotices();
+                const container = document.getElementById('noticesContainer');
+                if (!container) return;
+                
+                const searchInput = document.getElementById('searchInput');
+                const search = searchInput ? searchInput.value.toLowerCase() : '';
+                let notices = window.getNotices();
+
+                if (window.currentFilter !== 'all') {
+                    notices = notices.filter(n => n.category === window.currentFilter);
+                }
+
+                if (search) {
+                    notices = notices.filter(n => n.title.toLowerCase().includes(search) || n.body.toLowerCase().includes(search));
+                }
+
+                notices.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+
+                if (notices.length === 0) {
+                    container.innerHTML = `<div class="empty-state"><i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 0.5rem;"></i><p>Žádná oznámení neodpovídají zadání.</p></div>`;
+                    return;
+                }
+
+                container.innerHTML = notices.map(n => {
+                    let badgeClass = 'badge-general';
+                    if (n.category === 'Havárie/Odstávka') badgeClass = 'badge-danger';
+                    if (n.category === 'Důležité') badgeClass = 'badge-warning';
+                    if (n.category === 'Plánované práce') badgeClass = 'badge-info';
+
+                    let expiryText = '';
+                    if (n.expiryDate) {
+                        const parts = n.expiryDate.split('-');
+                        if (parts.length === 3) {
+                            expiryText = `<span><i class="fa-solid fa-hourglass-end"></i> Platnost do: ${parts[2]}.${parts[1]}.${parts[0]}</span>`;
+                        }
+                    }
+
+                    return `
+                        <article class="notice-card ${n.pinned ? 'pinned' : ''}">
+                            <div class="notice-header">
+                                <h3 class="notice-title">
+                                    ${n.pinned ? '<i class="fa-solid fa-thumbtack" style="color:var(--danger); margin-right:4px;"></i>' : ''}
+                                    ${window.escapeHtml(n.title)}
+                                </h3>
+                                <span class="notice-badge ${badgeClass}">${window.escapeHtml(n.category)}</span>
+                            </div>
+                            <div class="notice-meta">
+                                <span><i class="fa-regular fa-calendar"></i> Vydáno: ${n.date}</span>
+                                ${expiryText}
+                            </div>
+                            <div class="notice-body">${window.escapeHtml(n.body)}</div>
+                            ${window.isAdmin ? `
+                                <div class="notice-admin-actions">
+                                    <button class="btn btn-sm btn-secondary" onclick="editNotice('${n.id}')"><i class="fa-solid fa-pen"></i> Upravit</button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteNotice('${n.id}')"><i class="fa-solid fa-trash"></i> Smazat</button>
+                                </div>
+                            ` : ''}
+                        </article>
+                    `;
+                }).join('');
+            } catch (e) {}
+        };
+
+        window.openNoticeModal = function(editId = null) {
+            const modal = document.getElementById('noticeModal');
+            const form = document.getElementById('noticeForm');
+            const idInput = document.getElementById('noticeId');
+            const modalTitle = document.getElementById('modalTitle');
+
+            if (form) form.reset();
+            if (idInput) idInput.value = '';
+
+            if (editId) {
+                const notice = window.getNotices().find(n => n.id === editId);
+                if (notice) {
+                    if (modalTitle) modalTitle.innerText = 'Upravit oznámení';
+                    if (idInput) idInput.value = notice.id;
+                    const titleInput = document.getElementById('noticeTitle');
+                    const catInput = document.getElementById('noticeCategory');
+                    const expInput = document.getElementById('noticeExpiry');
+                    const bodyInput = document.getElementById('noticeBody');
+                    const pinInput = document.getElementById('noticePinned');
+
+                    if (titleInput) titleInput.value = notice.title;
+                    if (catInput) catInput.value = notice.category;
+                    if (expInput) expInput.value = notice.expiryDate || '';
+                    if (bodyInput) bodyInput.value = notice.body;
+                    if (pinInput) pinInput.checked = !!notice.pinned;
+                }
+            } else {
+                if (modalTitle) modalTitle.innerText = 'Nové oznámení';
+            }
+
+            if (modal) modal.classList.add('active');
+        };
+
+        window.closeNoticeModal = function() {
+            const modal = document.getElementById('noticeModal');
+            if (modal) modal.classList.remove('active');
+        };
+
+        window.saveNotice = function(e) {
+            e.preventDefault();
+            const id = document.getElementById('noticeId').value;
+            const title = document.getElementById('noticeTitle').value;
+            const category = document.getElementById('noticeCategory').value;
+            const expiryDate = document.getElementById('noticeExpiry').value;
+            const body = document.getElementById('noticeBody').value;
+            const pinned = document.getElementById('noticePinned').checked;
+
+            let notices = window.getNotices();
+
+            if (id) {
+                notices = notices.map(n => n.id === id ? { ...n, title, category, expiryDate, body, pinned } : n);
+            } else {
+                const newNotice = {
+                    id: Date.now().toString(),
+                    title,
+                    category,
+                    date: new Date().toLocaleDateString('cs-CZ'),
+                    expiryDate,
+                    body,
+                    pinned
+                };
+                notices.unshift(newNotice);
+            }
+
+            localStorage.setItem('byty_jichova_notices', JSON.stringify(notices));
+            window.closeNoticeModal();
+            window.renderNotices();
+        };
+
+        window.editNotice = function(id) {
+            window.openNoticeModal(id);
+        };
+
+        window.deleteNotice = function(id) {
+            if (confirm("Opravdu chcete toto oznámení smazat?")) {
+                let notices = window.getNotices().filter(n => n.id !== id);
+                localStorage.setItem('byty_jichova_notices', JSON.stringify(notices));
+                window.renderNotices();
+            }
+        };
+
+        window.exportData = function() {
+            const data = {
+                notices: window.getNotices(),
+                stanovyText: localStorage.getItem('byty_jichova_stanovy_text') || defaultStanovyText,
+                exportDate: new Date().toISOString()
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `byty_jichova_zaloha_${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        };
+
+        window.importDataTrigger = function() {
+            const input = document.getElementById('importFileInput');
+            if (input) input.click();
+        };
+
+        window.importData = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (imported && imported.notices && Array.isArray(imported.notices)) {
+                        localStorage.setItem('byty_jichova_notices', JSON.stringify(imported.notices));
+                        if (imported.stanovyText) {
+                            localStorage.setItem('byty_jichova_stanovy_text', imported.stanovyText);
+                            window.renderStanovyText();
+                        }
+                        window.renderNotices();
+                        alert("Data byla úspěšně obnovena ze zálohy.");
+                    } else {
+                        alert("Neplatný formát záložního souboru!");
+                    }
+                } catch (err) {
+                    alert("Chyba při zpracování souboru: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('byty_jichova_notices')) {
+                localStorage.setItem('byty_jichova_notices', JSON.stringify(defaultNotices));
+            }
+            if (!localStorage.getItem('byty_jichova_pass')) {
+                localStorage.setItem('byty_jichova_pass', "admin123");
+            }
+            if (!localStorage.getItem('byty_jichova_stanovy_text')) {
+                localStorage.setItem('byty_jichova_stanovy_text', defaultStanovyText);
+            }
+            
+            window.checkAndCleanupExpiredNotices();
+            window.renderNotices();
+            window.renderStanovyText();
+        });
+    </script>
+</body>
+</html>
