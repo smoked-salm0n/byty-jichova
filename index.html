@@ -1,581 +1,689 @@
 <!DOCTYPE html>
-<html lang="cs" class="h-full bg-slate-50">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Byty Jíchova - Informační portál a Správa domu</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Inter Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Byty Jíchova – Informační portál pro obyvatele</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+        :root {
+            --primary-color: #1e3a8a;
+            --primary-light: #3b82f6;
+            --accent-color: #0284c7;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
         }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
-        ::-webkit-scrollbar-track {
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 3rem;
+        }
+
+        /* Top Bar & Header */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            color: white;
+            padding: 2.5rem 1rem 3.5rem;
+            position: relative;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-title h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-title p {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Admin Controls Bar */
+        .admin-controls-bar {
+            background: #0f172a;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .admin-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #64748b;
+        }
+
+        .status-indicator.active {
+            background-color: var(--success);
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        /* Main Container Layout */
+        .main-container {
+            max-width: 1100px;
+            margin: -2rem auto 0;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cards & Components */
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--bg-body);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Noticeboard Filters & Search */
+        .noticeboard-tools {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.6rem 0.8rem 0.6rem 2.2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .filter-btn {
             background: #f1f5f9;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+
+        /* Notice Cards */
+        .notice-card {
+            border-left: 4px solid var(--primary-light);
+            background: #ffffff;
+            border-radius: 8px;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .notice-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -2px rgba(0,0,0,0.08);
+        }
+
+        .notice-card.pinned {
+            border-left-color: var(--danger);
+            background: #fffdfd;
+        }
+
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .notice-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .notice-badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-info { background: #e0f2fe; color: #075985; }
+        .badge-general { background: #f1f5f9; color: #475569; }
+
+        .notice-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .notice-body {
+            color: #334155;
+            white-space: pre-line;
+            font-size: 0.95rem;
+        }
+
+        .notice-admin-actions {
+            margin-top: 1rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        /* Buttons & Forms */
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .btn:hover { background: #1d4ed8; }
+        .btn-sm { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
+        .btn-danger { background: var(--danger); }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-secondary { background: #64748b; }
+        .btn-secondary:hover { background: #475569; }
+        .btn-outline { background: transparent; border: 1px solid currentColor; color: inherit; }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 550px;
+            width: 100%;
+            padding: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Emergency contacts sidebar */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--bg-body);
+        }
+
+        .contact-item i {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #eff6ff;
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
         }
     </style>
 </head>
-<body class="h-full text-slate-800 flex flex-col min-h-screen">
+<body>
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-lg border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo / Title -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('news')">
-                    <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/30">
-                        <i data-lucide="building-2" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-xl tracking-tight leading-tight">Byty Jíchova</h1>
-                        <p class="text-xs text-slate-400">Informační portál obyvatel & SVJ</p>
-                    </div>
-                </div>
-
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-1">
-                    <button onclick="switchTab('news')" id="nav-news" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 bg-blue-600 text-white">
-                        <i data-lucide="newspaper" class="w-4 h-4"></i>
-                        <span>Aktuality a Oznámení</span>
-                    </button>
-                    <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 text-slate-300 hover:bg-slate-800 hover:text-white">
-                        <i data-lucide="info" class="w-4 h-4"></i>
-                        <span>O Domu & Pravidla</span>
-                    </button>
-                    <button onclick="switchTab('contacts')" id="nav-contacts" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 text-slate-300 hover:bg-slate-800 hover:text-white">
-                        <i data-lucide="phone" class="w-4 h-4"></i>
-                        <span>Kontakty & Havárie</span>
-                    </button>
-                </nav>
-
-                <!-- Admin Action Controls -->
-                <div class="flex items-center space-x-3">
-                    <button id="admin-login-btn" onclick="openLoginModal()" class="px-3.5 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center space-x-1.5 transition">
-                        <i data-lucide="lock" class="w-3.5 h-3.5 text-blue-400"></i>
-                        <span>Správa</span>
-                    </button>
-
-                    <div id="admin-badge" class="hidden flex items-center space-x-2">
-                        <button onclick="switchTab('admin')" id="nav-admin" class="px-3 py-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-lg text-xs font-semibold flex items-center space-x-1 hover:bg-amber-500/30">
-                            <i data-lucide="shield-check" class="w-4 h-4 text-amber-400"></i>
-                            <span>Admin Panel</span>
-                        </button>
-                        <button onclick="logoutAdmin()" title="Odhlásit správce" class="p-2 bg-red-500/20 text-red-300 border border-red-500/30 rounded-lg hover:bg-red-500/30 transition">
-                            <i data-lucide="log-out" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-
-                    <!-- Mobile Menu Button -->
-                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-slate-300 hover:bg-slate-800">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
-                    </button>
-                </div>
+    <!-- Admin Status Header Bar -->
+    <div class="admin-controls-bar">
+        <div class="admin-status">
+            <div class="status-indicator" id="statusDot"></div>
+            <span id="statusText">Režim pro veřejnost</span>
+        </div>
+        <div class="admin-actions">
+            <button class="btn btn-sm btn-outline" id="authBtn" onclick="toggleAuth()">
+                <i class="fa-solid fa-lock"></i> Přihlášení správce
+            </button>
+            <div id="adminTools" style="display: none; gap: 0.5rem;">
+                <button class="btn btn-sm btn-outline" onclick="openNoticeModal()" title="Přidat aktualitu">
+                    <i class="fa-solid fa-plus"></i> Nová zpráva
+                </button>
+                <button class="btn btn-sm btn-outline" onclick="exportData()" title="Zálohovat všechna data do souboru">
+                    <i class="fa-solid fa-download"></i> Záloha
+                </button>
+                <button class="btn btn-sm btn-outline" onclick="importDataTrigger()" title="Obnovit ze zálohy">
+                    <i class="fa-solid fa-upload"></i> Obnovit
+                </button>
+                <button class="btn btn-sm btn-outline" onclick="changePassword()" title="Změnit heslo správce">
+                    <i class="fa-solid fa-key"></i> Heslo
+                </button>
+                <input type="file" id="importFileInput" style="display:none;" onchange="importData(event)">
             </div>
         </div>
+    </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 bg-slate-900 px-4 pt-2 pb-4 space-y-2">
-            <button onclick="switchTab('news'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-white hover:bg-slate-800">Aktuality a Oznámení</button>
-            <button onclick="switchTab('about'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">O Domu & Pravidla</button>
-            <button onclick="switchTab('contacts'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">Kontakty & Havárie</button>
+    <!-- Main Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-title">
+                <h1><i class="fa-solid fa-building-user"></i> Byty Jíchova</h1>
+                <p>Oficiální komunikační portál a Nástěnka SVJ / Obyvatel</p>
+            </div>
         </div>
     </header>
 
-    <!-- MAIN CONTENT AREA -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
-        <!-- ALERT BANNER FOR CRITICAL NOTICES -->
-        <div id="critical-alert-banner" class="hidden mb-8 bg-red-50 border-l-4 border-red-500 p-4 rounded-r-xl shadow-sm">
-            <div class="flex items-start">
-                <div class="flex-shrink-0 text-red-500 mt-0.5">
-                    <i data-lucide="alert-triangle" class="w-5 h-5"></i>
-                </div>
-                <div class="ml-3 flex-1">
-                    <h3 class="text-sm font-bold text-red-800 uppercase tracking-wide">Důležité havarijní upozornění</h3>
-                    <p id="critical-alert-text" class="text-sm text-red-700 mt-1"></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 1: NEWS & NOTICES (VEŘEJNÁ NÁSTĚNKA) -->
-        <section id="tab-news" class="tab-content space-y-6">
-            <!-- Filter & Search Controls -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4">
-                <!-- Categories -->
-                <div class="flex flex-wrap gap-2 w-full sm:w-auto">
-                    <button onclick="filterCategory('all')" id="cat-all" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white transition">Vše</button>
-                    <button onclick="filterCategory('Důležité')" id="cat-Důležité" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Důležité</button>
-                    <button onclick="filterCategory('Havárie/Odstávka')" id="cat-Havárie/Odstávka" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Havárie & Odstávky</button>
-                    <button onclick="filterCategory('Plánované práce')" id="cat-Plánované práce" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Plánované práce</button>
-                    <button onclick="filterCategory('Informace')" id="cat-Informace" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Obecné</button>
+    <!-- Main Content Area -->
+    <div class="main-container">
+        
+        <!-- Left Column: Noticeboard / Aktuality -->
+        <main>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fa-solid fa-bullhorn"></i> Aktuality a Oznámení</h2>
                 </div>
 
-                <!-- Search Input -->
-                <div class="relative w-full sm:w-64">
-                    <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
-                    <input type="text" id="news-search" oninput="renderNews()" placeholder="Hledat v oznamech..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
-                </div>
-            </div>
-
-            <!-- News Grid / Feed -->
-            <div id="news-list" class="space-y-4">
-                <!-- Dynamically Rendered News Cards -->
-            </div>
-        </section>
-
-        <!-- TAB 2: ABOUT THE BUILDING & RULES -->
-        <section id="tab-about" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-900 to-slate-800 px-6 py-8 text-white">
-                    <h2 class="text-2xl font-bold">O Domu Byty Jíchova</h2>
-                    <p class="text-blue-200 text-sm mt-1">Základní informace pro rezidenty, nájemce a vlastníky jednotek.</p>
-                </div>
-
-                <div class="p-6 md:p-8 space-y-8">
-                    <!-- General Rules Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                            <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center mb-3">
-                                <i data-lucide="moon" class="w-5 h-5"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-900 mb-1">Noční klid</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">Noční klid je v domě stanoven od <strong>22:00 do 06:00 hod.</strong> Prosíme o dodržování sousedského ohleduplného chování.</p>
-                        </div>
-                        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                            <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3">
-                                <i data-lucide="trash-2" class="w-5 h-5"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-900 mb-1">Popelnice & Odpad</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">Popelnice na smíšený i tříděný odpad naleznete na vyhrazeném místě ve dvoře / před domem. Svoz probíhá pravidelně v úterý.</p>
-                        </div>
-                        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
-                                <i data-lucide="shield-alert" class="w-5 h-5"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-900 mb-1">Bezpečnost domu</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">Vždy se ujistěte, že jsou hlavní vchodové dveře řádně zavřené. Nevpouštějte do domu cizí neohlášené osoby.</p>
-                        </div>
+                <!-- Filters and Search -->
+                <div class="noticeboard-tools">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" placeholder="Hledat v oznámeních..." oninput="renderNotices()">
                     </div>
+                    <button class="filter-btn active" onclick="setFilter('all', this)">Vše</button>
+                    <button class="filter-btn" onclick="setFilter('Havárie/Odstávka', this)">Odstávky</button>
+                    <button class="filter-btn" onclick="setFilter('Důležité', this)">Důležité</button>
+                    <button class="filter-btn" onclick="setFilter('Plánované práce', this)">Práce</button>
+                </div>
 
-                    <!-- Custom Editable Building Content -->
-                    <div class="border-t border-slate-200 pt-6">
-                        <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                            <i data-lucide="file-text" class="w-5 h-5 text-blue-600"></i>
-                            <span>Provozní řád a podrobné informace</span>
-                        </h3>
-                        <div id="house-rules-display" class="prose max-w-none text-slate-700 text-sm leading-relaxed space-y-3">
-                            <!-- Populated via JS -->
-                        </div>
-                    </div>
+                <!-- Notices Container -->
+                <div id="noticesContainer">
+                    <!-- Dynamic rendering -->
                 </div>
             </div>
-        </section>
+        </main>
 
-        <!-- TAB 3: CONTACTS & EMERGENCY -->
-        <section id="tab-contacts" class="tab-content hidden space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Emergency Red Box -->
-                <div class="lg:col-span-1 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl p-6 text-white shadow-lg flex flex-col justify-between">
+        <!-- Right Column: Sidebar Contacts & Emergency Info -->
+        <aside>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fa-solid fa-phone"></i> Havarijní kontaky</h2>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-bolt"></i>
                     <div>
-                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                            <i data-lucide="phone-call" class="w-6 h-6 text-white"></i>
-                        </div>
-                        <h2 class="text-xl font-bold mb-2">Havarijní Služba 24/7</h2>
-                        <p class="text-xs text-red-100 leading-relaxed mb-6">
-                            V případě havárie vody, plynu, elektriky nebo kanalizace mimo pracovní dobu správy kontaktujte ihned havarijní dispečink.
-                        </p>
-                        <div class="space-y-3 bg-red-800/50 p-4 rounded-xl border border-red-500/30">
-                            <div class="text-xs text-red-200 uppercase font-semibold">Havarijní Dispečink</div>
-                            <div id="emergency-phone-display" class="text-2xl font-extrabold tracking-wide"></div>
-                            <div id="emergency-note-display" class="text-xs text-red-200"></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 border-t border-red-500/30 pt-4 text-xs text-red-100 flex justify-between items-center">
-                        <span>Hasiči: 150</span>
-                        <span>Záchranka: 155</span>
-                        <span>Policie: 158</span>
+                        <strong>Elektřina (Pohotovost)</strong>
+                        <p style="font-size:0.85rem; color:var(--text-muted)">800 850 860</p>
                     </div>
                 </div>
-
-                <!-- Contacts Cards -->
-                <div class="lg:col-span-2 space-y-4">
-                    <h2 class="text-lg font-bold text-slate-900 flex items-center space-x-2">
-                        <i data-lucide="users" class="w-5 h-5 text-blue-600"></i>
-                        <span>Důležité Kontakty & Správa Domu</span>
-                    </h2>
-
-                    <div id="contacts-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Populated dynamically via JS -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 4: SECURE ADMIN PANEL (CHOSEN TAB FOR ADMIN) -->
-        <section id="tab-admin" class="tab-content hidden space-y-8">
-            <!-- ADMIN STATUS BAR & BACKUP SECURITY BANNER -->
-            <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 text-white shadow-xl border border-slate-700">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div class="contact-item">
+                    <i class="fa-solid fa-droplet"></i>
                     <div>
-                        <div class="flex items-center space-x-2">
-                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                Zabezpečená relace aktivní
-                            </span>
-                            <span id="session-timer" class="text-xs text-slate-400">Automatické odhlášení za: 15:00</span>
-                        </div>
-                        <h2 class="text-2xl font-bold mt-2">Bezpečná Správa Webových Stránek</h2>
-                        <p class="text-xs text-slate-400 mt-1">Všechny změny jsou ihned zabezpečeně uloženy. Doporučujeme pravidelně stahovat zálohu.</p>
+                        <strong>Voda a Kanalizace</strong>
+                        <p style="font-size:0.85rem; color:var(--text-muted)">840 111 112</p>
                     </div>
-
-                    <!-- Backup / Restore Actions -->
-                    <div class="flex flex-wrap items-center gap-2">
-                        <button onclick="exportBackupData()" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 shadow-md transition">
-                            <i data-lucide="download" class="w-4 h-4"></i>
-                            <span>Stáhnout Zálohu (JSON)</span>
-                        </button>
-                        <label class="px-3.5 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-xl text-xs font-semibold flex items-center space-x-1.5 cursor-pointer transition">
-                            <i data-lucide="upload" class="w-4 h-4"></i>
-                            <span>Obnovit ze Zálohy</span>
-                            <input type="file" id="import-file" onchange="importBackupData(event)" accept=".json" class="hidden">
-                        </label>
-                        <button onclick="resetToFactoryDefault()" class="px-3.5 py-2 bg-red-900/40 hover:bg-red-900/70 text-red-300 border border-red-700/50 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition">
-                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-                            <span>Reset do Továrního Nastavení</span>
-                        </button>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-fire"></i>
+                    <div>
+                        <strong>Plyn - Havárie</strong>
+                        <p style="font-size:0.85rem; color:var(--text-muted)">1239</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-wrench"></i>
+                    <div>
+                        <strong>Výtah - Poruchy</strong>
+                        <p style="font-size:0.85rem; color:var(--text-muted)">800 100 200</p>
                     </div>
                 </div>
             </div>
 
-            <!-- TABBED ADMIN SUB-SECTIONS -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-8">
-                
-                <!-- 1. PRIDAAT / UPRAVIT AKTUALITU -->
-                <div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100 flex items-center space-x-2">
-                        <i data-lucide="plus-circle" class="w-5 h-5 text-blue-600"></i>
-                        <span id="form-news-title">Přidat Nové Oznámení / Aktualitu</span>
-                    </h3>
-
-                    <form id="news-form" onsubmit="handleSaveNews(event)" class="space-y-4">
-                        <input type="hidden" id="news-id">
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="md:col-span-2">
-                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Název Oznámení / Nadpis *</label>
-                                <input type="text" id="news-title-input" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="např. Plánovaná odstávka teplé vody">
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Kategorie *</label>
-                                <select id="news-category-input" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    <option value="Důležité">Důležité</option>
-                                    <option value="Havárie/Odstávka">Havárie / Odstávka</option>
-                                    <option value="Plánované práce">Plánované práce</option>
-                                    <option value="Informace">Obecné Informace</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Obsah Zprávy *</label>
-                            <textarea id="news-content-input" rows="4" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Zadejte podrobný text oznamu..."></textarea>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Odkaz / Příloha (URL souboru nebo dokumentu)</label>
-                                <input type="text" id="news-link-input" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://... nebo nazev_souboru.pdf">
-                            </div>
-
-                            <div class="flex items-center space-x-6 pt-5">
-                                <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" id="news-pinned-input" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-slate-300">
-                                    <span class="text-sm font-semibold text-slate-700">Přípnout na vrch nástěnky</span>
-                                </label>
-                                <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" id="news-critical-input" class="w-4 h-4 text-red-600 rounded focus:ring-red-500 border-slate-300">
-                                    <span class="text-sm font-semibold text-red-600">Zobrazit jako kritické havarijní upozornění</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center space-x-3 pt-2">
-                            <button type="submit" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl shadow-md transition flex items-center space-x-2">
-                                <i data-lucide="save" class="w-4 h-4"></i>
-                                <span>Uložit Oznámení</span>
-                            </button>
-                            <button type="button" onclick="resetNewsForm()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold text-sm rounded-xl transition">
-                                Zrušit / Vyčistit
-                            </button>
-                        </div>
-                    </form>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fa-solid fa-circle-info"></i> Správa domu</h2>
                 </div>
-
-                <!-- 2. SPRÁVA EXISTUJÍCÍCH AKTUALIT TABULKA -->
-                <div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">Přehled a Správa Zpráv</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm text-slate-600">
-                            <thead class="bg-slate-50 text-xs font-bold uppercase text-slate-500 border-b border-slate-200">
-                                <tr>
-                                    <th class="p-3">Datum</th>
-                                    <th class="p-3">Název</th>
-                                    <th class="p-3">Kategorie</th>
-                                    <th class="p-3">Přípnuté</th>
-                                    <th class="p-3 text-right">Akce</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-news-table" class="divide-y divide-slate-100">
-                                <!-- Populated dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- 3. ZMĚNA HESLA A BEZPEČNOSTI -->
-                <div class="border-t border-slate-200 pt-8">
-                    <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center space-x-2">
-                        <i data-lucide="key-round" class="w-5 h-5 text-amber-600"></i>
-                        <span>Změna Přístupového Hesla Administrátora</span>
-                    </h3>
-                    <form onsubmit="handleChangePassword(event)" class="max-w-md space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Současné Heslo</label>
-                            <input type="password" id="current-pass-input" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Nové Heslo</label>
-                            <input type="password" id="new-pass-input" minlength="4" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm">
-                        </div>
-                        <button type="submit" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase rounded-xl transition">
-                            Aktualizovat Heslo
-                        </button>
-                    </form>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.8rem;">
+                    V případě dotazů k vyúčtování nebo technickým věcem kontaktujte výbor SVJ.
+                </p>
+                <div style="font-size: 0.9rem;">
+                    <p><strong>E-mail:</strong> vybor@bytyjichova.cz</p>
+                    <p><strong>Úřední hodiny:</strong> Každé 1. pondělí v měsíci (18:00–19:00)</p>
                 </div>
             </div>
-        </section>
+        </aside>
+    </div>
 
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <span class="font-bold text-slate-200">Byty Jíchova</span> &copy; <span id="year-span"></span> — Bezpečná správa nemovitosti
-            </div>
-            <div class="flex items-center space-x-4">
-                <span class="text-slate-500">Stav systému: <span class="text-emerald-400 font-semibold">Zabezpečeno / Lokální záloha OK</span></span>
-            </div>
-        </div>
-    </footer>
-
-    <!-- MODAL: LOGIN DIALOG -->
-    <div id="login-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-sm w-full p-6 relative">
-            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+    <!-- Modal Form for Adding/Editing Notice -->
+    <div class="modal" id="noticeModal">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 1rem;" id="modalTitle">Nové oznámení</h3>
+            <form id="noticeForm" onsubmit="saveNotice(event)">
+                <input type="hidden" id="noticeId">
+                <div class="form-group">
+                    <label>Název oznámení</label>
+                    <input type="text" id="noticeTitle" class="form-control" required placeholder="Např. Odstávka teplé vody">
                 </div>
-                <h3 class="text-xl font-bold text-slate-900">Vstup pro Správce</h3>
-                <p class="text-xs text-slate-500 mt-1">Zadejte administrátorské heslo pro úpravu obsahu stránek.</p>
-            </div>
-
-            <form onsubmit="handleLogin(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Heslo / Přístupový kód</label>
-                    <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <p class="text-[10px] text-slate-400 mt-1">Výchozí heslo při prvním spuštění je: <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-600 font-mono">admin123</code></p>
+                <div class="form-group">
+                    <label>Kategorie</label>
+                    <select id="noticeCategory" class="form-control">
+                        <option value="Informace">Informace</option>
+                        <option value="Důležité">Důležité</option>
+                        <option value="Havárie/Odstávka">Havárie/Odstávka</option>
+                        <option value="Plánované práce">Plánované práce</option>
+                    </select>
                 </div>
-
-                <div id="login-error" class="hidden text-xs text-red-600 bg-red-50 p-2.5 rounded-lg border border-red-200 font-medium"></div>
-
-                <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow-md transition">
-                    Přihlásit se do Správy
-                </button>
+                <div class="form-group">
+                    <label>Obsah zprávy</label>
+                    <textarea id="noticeBody" class="form-control" required placeholder="Zadejte podrobný text zprávy..."></textarea>
+                </div>
+                <div class="form-group" style="display: flex; gap: 0.5rem; align-items: center;">
+                    <input type="checkbox" id="noticePinned">
+                    <label for="noticePinned" style="margin: 0; cursor: pointer;">Přednostní zpráva (připnout nahoru)</label>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeNoticeModal()">Zrušit</button>
+                    <button type="submit" class="btn">Uložit a publikovat</button>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- NOTIFICATION TOAST -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 hidden max-w-md bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl border border-slate-700 flex items-center space-x-3 transition transform duration-300">
-        <i id="toast-icon" data-lucide="check-circle" class="w-5 h-5 text-emerald-400 flex-shrink-0"></i>
-        <span id="toast-message" class="text-xs font-medium"></span>
-    </div>
-
-    <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-        // INITIAL DEFAULT DATA (FACTORY DEFAULTS)
-        const DEFAULT_DATA = {
-            adminPasswordHash: "admin123", // In actual app, simple secure local token comparison
-            houseRules: `
-                <p><strong>1. Udržování čistoty:</strong> Společné prostory (chodby, schodiště, výtah, kolárna) udržujte v čistotě a nevkládejte zde osobní věci či odpadky.</p>
-                <p class="mt-2"><strong>2. Rekonstrukce a hlučné práce:</strong> Veškeré hlučné práce provádějte výhradně v pracovní dny od 8:00 do 18:00 a v sobotu od 9:00 do 15:00. V neděli a o svátcích jsou hlučné práce zakázány.</p>
-                <p class="mt-2"><strong>3. Klíče a přístupy:</strong> Klíče od vchodů a čipy nepřidělujte neznámým osobám. Ztrátu čipu ihned nahlaste správci k zablokování.</p>
-            `,
-            emergencyPhone: "+420 800 123 456",
-            emergencyNote: "NONSTOP pohotovost pro Havárie vody, plynu a elektro",
-            contacts: [
-                { id: "1", role: "Předseda výboru SVJ", name: "Jan Jícha", phone: "+420 602 111 222", email: "predseda@bytyjichova.cz", hours: "Po-Pá 17:00-19:00" },
-                { id: "2", role: "Správní firma / Účetní", name: "Správa Nemovitostí s.r.o.", phone: "+420 596 000 111", email: "info@spravadomutest.cz", hours: "Po-Čt 8:00-15:00" },
-                { id: "3", role: "Technik objektu / Údržba", name: "Karel Novák", phone: "+420 777 333 444", email: "udrzba@bytyjichova.cz", hours: "Po-Pá 7:00-15:00" }
-            ],
-            news: [
-                {
-                    id: "n1",
-                    title: "Plánovaná pravidelná revize plynových zařízení",
-                    category: "Plánované práce",
-                    date: "2026-10-20",
-                    pinned: true,
-                    critical: false,
-                    content: "Upozorňujeme všechny vlastníky a nájemce, že dne 15. listopadu 2026 bude v celém domě probíhat pravidelná roční revize plynu. Prosíme o zpřístupnění bytů v čase od 8:00 do 14:00.",
-                    link: ""
-                },
-                {
-                    id: "n2",
-                    title: "Odstávka teplé vody - údržba teplovodu",
-                    category: "Havárie/Odstávka",
-                    date: "2026-10-18",
-                    pinned: false,
-                    critical: true,
-                    content: "Z důvodu neplánované opravy horkovodu dojde ve čtvrtek k přerušení dodávky teplé vody od 09:00 do 16:00. Omlouváme se za vzniklé komplikace.",
-                    link: ""
-                },
-                {
-                    id: "n3",
-                    title: "Zápis z podzimního shromáždění SVJ",
-                    category: "Informace",
-                    date: "2026-10-05",
-                    pinned: false,
-                    critical: false,
-                    content: "Byl publikován oficiální zápis z říjnového shromáždění vlastníků. Kompletní dokument si můžete prohlédnout v příloze níže.",
-                    link: "http://www.bytyjichova.cz/zapis_SVJ_2026.pdf"
-                }
-            ]
-        };
-
-        // STATE MANAGEMENT
-        let appData = null;
-        let isAdminLoggedIn = false;
-        let activeTab = 'news';
+        // Data Store & State Management
+        let isAdmin = false;
         let currentFilter = 'all';
-        let sessionTimeoutTimer = null;
-        const SESSION_TIMEOUT_MS = 15 * 60 * 1000; // 15 Minutes session lock security
+        let inactivityTimer;
 
-        // INITIALIZATION
-        window.onload = function() {
-            document.getElementById('year-span').textContent = new Date().getFullYear();
-            loadAppData();
-            renderAll();
-            lucide.createIcons();
-        };
+        // Default initial data if localStorage is empty
+        const defaultNotices = [
+            {
+                id: "1",
+                title: "Odstávka teplé vody a topení",
+                category: "Havárie/Odstávka",
+                date: "24. 10. 2026",
+                body: "Z důvodu plánované opravy teplovodu dojde ve čtvrtek 29. 10. od 8:00 do 16:00 k odstávce teplé vody.\n\nDěkujeme za pochopení.",
+                pinned: true
+            },
+            {
+                id: "2",
+                title: "Čištění garáží a společných prostor",
+                category: "Plánované práce",
+                date: "15. 10. 2026",
+                body: "Prosíme všechny vlastníky vozidel, aby v sobotu 7. 11. přeparkovali svá vozidla z podzemních garáží z důvodu strojního čištění podlah.",
+                pinned: false
+            }
+        ];
 
-        // DATA STORAGE HANDLERS (LOCAL PERSISTENCE WITH EXPORT/IMPORT SECURITY)
-        function loadAppData() {
-            const stored = localStorage.getItem('byty_jichova_db');
-            if (stored) {
-                try {
-                    appData = JSON.parse(stored);
-                } catch (e) {
-                    console.error("Failed to parse local database, resetting to standard defaults", e);
-                    appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
-                }
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('byty_jichova_notices')) {
+                localStorage.setItem('byty_jichova_notices', JSON.stringify(defaultNotices));
+            }
+            if (!localStorage.getItem('byty_jichova_pass')) {
+                // Default secure hash setup (password: admin123)
+                localStorage.setItem('byty_jichova_pass', "admin123");
+            }
+            renderNotices();
+        });
+
+        // Authentication Handler
+        function toggleAuth() {
+            if (isAdmin) {
+                logout();
             } else {
-                appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
-                saveAppData();
+                const pass = prompt("Zadejte přístupové heslo pro úpravu stránek:");
+                if (!pass) return;
+                
+                const storedPass = localStorage.getItem('byty_jichova_pass') || "admin123";
+                if (pass === storedPass) {
+                    isAdmin = true;
+                    updateAdminUI();
+                    resetInactivityTimer();
+                    alert("Byli jste úspěšně přihlášeni jako správce.");
+                } else {
+                    alert("Nespravné heslo! Přístup odepřen.");
+                }
             }
         }
 
-        function saveAppData() {
-            localStorage.setItem('byty_jichova_db', JSON.stringify(appData));
-            renderAll();
+        function logout() {
+            isAdmin = false;
+            clearTimeout(inactivityTimer);
+            updateAdminUI();
+            alert("Byli jste odhlášeni.");
         }
 
-        // RENDERERS
-        function renderAll() {
-            renderNews();
-            renderHouseRules();
-            renderContacts();
-            renderCriticalAlert();
-            if (isAdminLoggedIn) {
-                renderAdminNewsTable();
+        function updateAdminUI() {
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const authBtn = document.getElementById('authBtn');
+            const adminTools = document.getElementById('adminTools');
+
+            if (isAdmin) {
+                statusDot.classList.add('active');
+                statusText.innerText = 'Správce přihlášen';
+                authBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Odhlásit se';
+                adminTools.style.display = 'flex';
+            } else {
+                statusDot.classList.remove('active');
+                statusText.innerText = 'Režim pro veřejnost';
+                authBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Přihlášení správce';
+                adminTools.style.display = 'none';
             }
-            lucide.createIcons();
+            renderNotices();
         }
 
-        // 1. RENDER NEWS
-        function renderNews() {
-            const newsContainer = document.getElementById('news-list');
-            const searchInput = document.getElementById('news-search').value.toLowerCase();
+        function resetInactivityTimer() {
+            if (!isAdmin) return;
+            clearTimeout(inactivityTimer);
+            // Auto logout after 15 minutes inactivity
+            inactivityTimer = setTimeout(() => {
+                alert("Byli jste automaticky odhlášeni z důvodu neaktivity.");
+                logout();
+            }, 15 * 60 * 1000);
+        }
 
-            let filtered = appData.news.filter(item => {
-                const matchesCategory = (currentFilter === 'all') || (item.category === currentFilter);
-                const matchesSearch = item.title.toLowerCase().includes(searchInput) || item.content.toLowerCase().includes(searchInput);
-                return matchesCategory && matchesSearch;
-            });
+        document.addEventListener('mousemove', resetInactivityTimer);
+        document.addEventListener('keypress', resetInactivityTimer);
 
-            // Sort: Pinned first, then by date descending
-            filtered.sort((a, b) => {
-                if (a.pinned && !b.pinned) return -1;
-                if (!a.pinned && b.pinned) return 1;
-                return new Date(b.date) - new Date(a.date);
-            });
+        function changePassword() {
+            if (!isAdmin) return;
+            const newPass = prompt("Zadejte nové přístupové heslo správce:");
+            if (newPass && newPass.trim() !== "") {
+                localStorage.setItem('byty_jichova_pass', newPass.trim());
+                alert("Heslo bylo úspěšně změněno. Pro příští přihlášení použijte nové heslo.");
+            }
+        }
 
-            if (filtered.length === 0) {
-                newsContainer.innerHTML = `
-                    <div class="bg-white rounded-2xl p-8 text-center text-slate-500 border border-slate-200">
-                        <i data-lucide="newspaper" class="w-12 h-12 mx-auto text-slate-300 mb-2"></i>
-                        <p class="font-medium">Nebyly nalezeny žádné aktuality vyhovující zadaným kritériím.</p>
-                    </div>
-                `;
+        // Render Notices Board
+        function getNotices() {
+            return JSON.parse(localStorage.getItem('byty_jichova_notices') || '[]');
+        }
+
+        function setFilter(cat, btn) {
+            currentFilter = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderNotices();
+        }
+
+        function renderNotices() {
+            const container = document.getElementById('noticesContainer');
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            let notices = getNotices();
+
+            // Filter
+            if (currentFilter !== 'all') {
+                notices = notices.filter(n => n.category === currentFilter);
+            }
+
+            // Search Filter
+            if (search) {
+                notices = notices.filter(n => n.title.toLowerCase().includes(search) || n.body.toLowerCase().includes(search));
+            }
+
+            // Sort: Pinned first, then by date/id
+            notices.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+
+            if (notices.length === 0) {
+                container.innerHTML = `<div class="empty-state"><i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 0.5rem;"></i><p>Žádná oznámení neodpovídají zadání.</p></div>`;
                 return;
             }
 
-            newsContainer.innerHTML = filtered.map(item => {
-                const badgeColor = getCategoryBadgeColor(item.category);
+            container.innerHTML = notices.map(n => {
+                let badgeClass = 'badge-general';
+                if (n.category === 'Havárie/Odstávka') badgeClass = 'badge-danger';
+                if (n.category === 'Důležité') badgeClass = 'badge-warning';
+                if (n.category === 'Plánované práce') badgeClass = 'badge-info';
+
                 return `
-                    <article class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 transition hover:shadow-md relative overflow-hidden ${item.pinned ? 'border-l-4 border-l-blue-600' : ''}">
-                        ${item.pinned ? '<div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-xl flex items-center gap-1"><i data-lucide="pin" class="w-3 h-3"></i> Přípnuto</div>' : ''}
-                        
-                        <div class="flex items-center space-x-2 text-xs text-slate-400 mb-2">
-                            <span class="px-2.5 py-1 rounded-lg text-xs font-semibold ${badgeColor}">${item.category}</span>
-                            <span>•</span>
-                            <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> ${formatDate(item.date)}</span>
+                    <article class="notice-card ${n.pinned ? 'pinned' : ''}">
+                        <div class="notice-header">
+                            <h3 class="notice-title">
+                                ${n.pinned ? '<i class="fa-solid fa-thumbtack" style="color:var(--danger); margin-right:4px;"></i>' : ''}
+                                ${escapeHtml(n.title)}
+                            </h3>
+                            <span class="notice-badge ${badgeClass}">${escapeHtml(n.category)}</span>
                         </div>
-
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">${escapeHtml(item.title)}</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed whitespace-pre-line">${escapeHtml(item.content)}</p>
-
-                        ${item.link ? `
-                            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-                                <a href="${escapeHtml(item.link)}" target="_blank" rel="noopener" class="inline-flex items-center space-x-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100">
-                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                                    <span>Zobrazit přiložený dokument / odkaz</span>
-                                </a>
+                        <div class="notice-meta">
+                            <span><i class="fa-regular fa-calendar"></i> ${n.date}</span>
+                        </div>
+                        <div class="notice-body">${escapeHtml(n.body)}</div>
+                        ${isAdmin ? `
+                            <div class="notice-admin-actions">
+                                <button class="btn btn-sm btn-secondary" onclick="editNotice('${n.id}')"><i class="fa-solid fa-pen"></i> Upravit</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteNotice('${n.id}')"><i class="fa-solid fa-trash"></i> Smazat</button>
                             </div>
                         ` : ''}
                     </article>
@@ -583,315 +691,121 @@
             }).join('');
         }
 
-        // 2. RENDER CRITICAL ALERT BANNER IF ACTIVE
-        function renderCriticalAlert() {
-            const banner = document.getElementById('critical-alert-banner');
-            const alertText = document.getElementById('critical-alert-text');
-            const criticalNews = appData.news.find(n => n.critical);
+        // CRUD Modal Operations
+        function openNoticeModal(editId = null) {
+            const modal = document.getElementById('noticeModal');
+            document.getElementById('noticeForm').reset();
+            document.getElementById('noticeId').value = '';
 
-            if (criticalNews) {
-                alertText.textContent = `${criticalNews.title}: ${criticalNews.content.substring(0, 150)}...`;
-                banner.classList.remove('hidden');
-            } else {
-                banner.classList.add('hidden');
-            }
-        }
-
-        // 3. RENDER HOUSE RULES
-        function renderHouseRules() {
-            document.getElementById('house-rules-display').innerHTML = appData.houseRules;
-        }
-
-        // 4. RENDER CONTACTS
-        function renderContacts() {
-            document.getElementById('emergency-phone-display').textContent = appData.emergencyPhone;
-            document.getElementById('emergency-note-display').textContent = appData.emergencyNote;
-
-            const list = document.getElementById('contacts-list');
-            list.innerHTML = appData.contacts.map(c => `
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                    <span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-1">${escapeHtml(c.role)}</span>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">${escapeHtml(c.name)}</h3>
-                    <div class="space-y-1.5 text-xs text-slate-600">
-                        <div class="flex items-center space-x-2">
-                            <i data-lucide="phone" class="w-4 h-4 text-slate-400"></i>
-                            <a href="tel:${escapeHtml(c.phone)}" class="font-medium hover:text-blue-600">${escapeHtml(c.phone)}</a>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i data-lucide="mail" class="w-4 h-4 text-slate-400"></i>
-                            <a href="mailto:${escapeHtml(c.email)}" class="font-medium hover:text-blue-600">${escapeHtml(c.email)}</a>
-                        </div>
-                        <div class="flex items-center space-x-2 pt-1">
-                            <i data-lucide="clock" class="w-4 h-4 text-slate-400"></i>
-                            <span>${escapeHtml(c.hours)}</span>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // 5. RENDER ADMIN NEWS TABLE
-        function renderAdminNewsTable() {
-            const table = document.getElementById('admin-news-table');
-            table.innerHTML = appData.news.map(n => `
-                <tr class="hover:bg-slate-50 transition">
-                    <td class="p-3 text-xs font-medium">${formatDate(n.date)}</td>
-                    <td class="p-3 font-semibold text-slate-800">${escapeHtml(n.title)}</td>
-                    <td class="p-3"><span class="px-2 py-0.5 text-[11px] rounded font-semibold ${getCategoryBadgeColor(n.category)}">${n.category}</span></td>
-                    <td class="p-3">${n.pinned ? '<span class="text-blue-600 font-bold">Ano</span>' : 'Ne'}</td>
-                    <td class="p-3 text-right space-x-1">
-                        <button onclick="editNews('${n.id}')" class="p-1.5 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-lg"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
-                        <button onclick="deleteNews('${n.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg"><i data-lucide="trash" class="w-4 h-4"></i></button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // CATEGORY & FILTER CONTROLS
-        function filterCategory(cat) {
-            currentFilter = cat;
-            document.querySelectorAll('.cat-filter').forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white');
-                btn.classList.add('bg-slate-100', 'text-slate-600');
-            });
-            const activeBtn = document.getElementById(`cat-${cat}`);
-            if (activeBtn) {
-                activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
-                activeBtn.classList.add('bg-blue-600', 'text-white');
-            }
-            renderNews();
-        }
-
-        function getCategoryBadgeColor(cat) {
-            switch(cat) {
-                case 'Důležité': return 'bg-amber-100 text-amber-800 border border-amber-200';
-                case 'Havárie/Odstávka': return 'bg-red-100 text-red-800 border border-red-200';
-                case 'Plánované práce': return 'bg-blue-100 text-blue-800 border border-blue-200';
-                default: return 'bg-slate-100 text-slate-700 border border-slate-200';
-            }
-        }
-
-        // NAVIGATION TABS
-        function switchTab(tabId) {
-            if (tabId === 'admin' && !isAdminLoggedIn) {
-                openLoginModal();
-                return;
-            }
-
-            activeTab = tabId;
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white');
-                btn.classList.add('text-slate-300', 'hover:bg-slate-800');
-            });
-            const currentNav = document.getElementById(`nav-${tabId}`);
-            if (currentNav) {
-                currentNav.classList.remove('text-slate-300', 'hover:bg-slate-800');
-                currentNav.classList.add('bg-blue-600', 'text-white');
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function toggleMobileMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        }
-
-        // ADMIN SECURITY & AUTHENTICATION
-        function openLoginModal() {
-            document.getElementById('login-modal').classList.remove('hidden');
-            document.getElementById('login-password').focus();
-        }
-
-        function closeLoginModal() {
-            document.getElementById('login-modal').classList.add('hidden');
-            document.getElementById('login-error').classList.add('hidden');
-            document.getElementById('login-password').value = '';
-        }
-
-        function handleLogin(e) {
-            e.preventDefault();
-            const pass = document.getElementById('login-password').value;
-
-            if (pass === appData.adminPasswordHash) {
-                isAdminLoggedIn = true;
-                closeLoginModal();
-                document.getElementById('admin-login-btn').classList.add('hidden');
-                document.getElementById('admin-badge').classList.remove('hidden');
-                showToast("Byl jste úspěšně přihlášen jako správce.", "check-circle");
-                startSessionTimer();
-                switchTab('admin');
-                renderAdminNewsTable();
-            } else {
-                const err = document.getElementById('login-error');
-                err.textContent = "Nesprávné administrátorské heslo! Zkuste to znovu.";
-                err.classList.remove('hidden');
-            }
-        }
-
-        function logoutAdmin() {
-            isAdminLoggedIn = false;
-            clearTimeout(sessionTimeoutTimer);
-            document.getElementById('admin-login-btn').classList.remove('hidden');
-            document.getElementById('admin-badge').classList.add('hidden');
-            showToast("Správce byl bezpečně odhlášen.", "shield-off");
-            switchTab('news');
-        }
-
-        function startSessionTimer() {
-            clearTimeout(sessionTimeoutTimer);
-            sessionTimeoutTimer = setTimeout(() => {
-                if (isAdminLoggedIn) {
-                    logoutAdmin();
-                    alert("Vaše administrátorská relace vypršela z důvodu neaktivity. Pro úpravy se znovu přihlaste.");
+            if (editId) {
+                const notice = getNotices().find(n => n.id === editId);
+                if (notice) {
+                    document.getElementById('modalTitle').innerText = 'Upravit oznámení';
+                    document.getElementById('noticeId').value = notice.id;
+                    document.getElementById('noticeTitle').value = notice.title;
+                    document.getElementById('noticeCategory').value = notice.category;
+                    document.getElementById('noticeBody').value = notice.body;
+                    document.getElementById('noticePinned').checked = !!notice.pinned;
                 }
-            }, SESSION_TIMEOUT_MS);
-        }
-
-        function handleChangePassword(e) {
-            e.preventDefault();
-            const curr = document.getElementById('current-pass-input').value;
-            const newP = document.getElementById('new-pass-input').value;
-
-            if (curr !== appData.adminPasswordHash) {
-                alert("Současné heslo není správné!");
-                return;
+            } else {
+                document.getElementById('modalTitle').innerText = 'Nové oznámení';
             }
 
-            appData.adminPasswordHash = newP;
-            saveAppData();
-            document.getElementById('current-pass-input').value = '';
-            document.getElementById('new-pass-input').value = '';
-            showToast("Nové heslo správce bylo úspěšně uloženo.", "key");
+            modal.classList.add('active');
         }
 
-        // ADMIN NEWS CRUD OPERATIONS
-        function handleSaveNews(e) {
+        function closeNoticeModal() {
+            document.getElementById('noticeModal').classList.remove('active');
+        }
+
+        function saveNotice(e) {
             e.preventDefault();
-            const id = document.getElementById('news-id').value;
-            const title = document.getElementById('news-title-input').value;
-            const category = document.getElementById('news-category-input').value;
-            const content = document.getElementById('news-content-input').value;
-            const link = document.getElementById('news-link-input').value;
-            const pinned = document.getElementById('news-pinned-input').checked;
-            const critical = document.getElementById('news-critical-input').checked;
+            const id = document.getElementById('noticeId').value;
+            const title = document.getElementById('noticeTitle').value;
+            const category = document.getElementById('noticeCategory').value;
+            const body = document.getElementById('noticeBody').value;
+            const pinned = document.getElementById('noticePinned').checked;
+
+            let notices = getNotices();
 
             if (id) {
-                // Update existing
-                const index = appData.news.findIndex(n => n.id === id);
-                if (index !== -1) {
-                    appData.news[index] = { ...appData.news[index], title, category, content, link, pinned, critical };
-                    showToast("Aktualita byla upravena.", "check");
-                }
+                // Update
+                notices = notices.map(n => n.id === id ? { ...n, title, category, body, pinned } : n);
             } else {
-                // Create new
-                const newId = 'n_' + Date.now();
-                const date = new Date().toISOString().split('T')[0];
-                appData.news.unshift({ id: newId, title, category, date, content, link, pinned, critical });
-                showToast("Nové oznámení bylo publikováno.", "plus");
+                // Create
+                const newNotice = {
+                    id: Date.now().toString(),
+                    title,
+                    category,
+                    date: new Date().toLocaleDateString('cs-CZ'),
+                    body,
+                    pinned
+                };
+                notices.unshift(newNotice);
             }
 
-            saveAppData();
-            resetNewsForm();
+            localStorage.setItem('byty_jichova_notices', JSON.stringify(notices));
+            closeNoticeModal();
+            renderNotices();
         }
 
-        function editNews(id) {
-            const item = appData.news.find(n => n.id === id);
-            if (!item) return;
-
-            document.getElementById('news-id').value = item.id;
-            document.getElementById('news-title-input').value = item.title;
-            document.getElementById('news-category-input').value = item.category;
-            document.getElementById('news-content-input').value = item.content;
-            document.getElementById('news-link-input').value = item.link || '';
-            document.getElementById('news-pinned-input').checked = item.pinned;
-            document.getElementById('news-critical-input').checked = item.critical || false;
-
-            document.getElementById('form-news-title').textContent = "Upravit Oznámení: " + item.title;
-            window.scrollTo({ top: 200, behavior: 'smooth' });
+        function editNotice(id) {
+            openNoticeModal(id);
         }
 
-        function deleteNews(id) {
-            if (confirm("Opravdu si přejete smazat toto oznámení?")) {
-                appData.news = appData.news.filter(n => n.id !== id);
-                saveAppData();
-                showToast("Oznámení bylo vymazáno.", "trash");
+        function deleteNotice(id) {
+            if (confirm("Opravdu chcete toto oznámení smazat?")) {
+                let notices = getNotices().filter(n => n.id !== id);
+                localStorage.setItem('byty_jichova_notices', JSON.stringify(notices));
+                renderNotices();
             }
         }
 
-        function resetNewsForm() {
-            document.getElementById('news-form').reset();
-            document.getElementById('news-id').value = '';
-            document.getElementById('form-news-title').textContent = "Přidat Nové Oznámení / Aktualitu";
+        // Data Backup & Disaster Recovery (JSON Export/Import)
+        function exportData() {
+            const data = {
+                notices: getNotices(),
+                exportDate: new Date().toISOString()
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `byty_jichova_zaloha_${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
         }
 
-        // BACKUP & RESTORE SECURITY SYSTEM (PROTECTION AGAINST UNAUTHORIZED OVERWRITE)
-        function exportBackupData() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData, null, 2));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", `Zaloha_BytyJichova_${new Date().toISOString().split('T')[0]}.json`);
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
-            showToast("Bezpečnostní záloha (JSON) byla stažena do vašeho zařízení.", "download");
+        function importDataTrigger() {
+            document.getElementById('importFileInput').click();
         }
 
-        function importBackupData(event) {
-            const fileReader = new FileReader();
-            fileReader.onload = function(e) {
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
                 try {
                     const imported = JSON.parse(e.target.result);
-                    if (imported && imported.news && imported.contacts) {
-                        appData = imported;
-                        saveAppData();
-                        showToast("Všechna data byla úspěšně obnovena ze zálohy!", "shield-check");
+                    if (imported && imported.notices && Array.isArray(imported.notices)) {
+                        localStorage.setItem('byty_jichova_notices', JSON.stringify(imported.notices));
+                        renderNotices();
+                        alert("Data byla úspěšně obnovena ze zálohy.");
                     } else {
-                        alert("Nahraný soubor neobsahuje platnou strukturu zálohy!");
+                        alert("Neplatný formát záložního souboru!");
                     }
                 } catch (err) {
-                    alert("Chyba při načítání souboru zálohy: " + err.message);
+                    alert("Chyba při zpracování souboru: " + err.message);
                 }
             };
-            if (event.target.files[0]) {
-                fileReader.readAsText(event.target.files[0]);
-            }
+            reader.readAsText(file);
         }
 
-        function resetToFactoryDefault() {
-            if (confirm("VAROVÁNÍ: Opravdu chcete provést kompletní reset do továrního nastavení? Všechny nové příspěvky budou nahrazeny výchozími.")) {
-                appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
-                saveAppData();
-                showToast("Systém byl obnoven do továrního stavu.", "rotate-ccw");
-            }
-        }
-
-        // HELPERS
-        function formatDate(dateStr) {
-            if (!dateStr) return '';
-            const d = new Date(dateStr);
-            return d.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
-        }
-
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-        }
-
-        function showToast(message, iconName = 'check-circle') {
-            const toast = document.getElementById('toast');
-            const msgEl = document.getElementById('toast-message');
-            const iconEl = document.getElementById('toast-icon');
-
-            msgEl.textContent = message;
-            iconEl.setAttribute('data-lucide', iconName);
-            lucide.createIcons();
-
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 4000);
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
     </script>
 </body>
