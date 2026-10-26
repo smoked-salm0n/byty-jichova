@@ -514,8 +514,8 @@
                 </div>
 
                 <div class="official-contacts">
-                    <p><strong><i class="fa-regular fa-envelope"></i> Email:</strong> <a href="mailto:bytyjichova@seznam.cz" style="color:#0284c7; font-weight:600;">bytyjichova@seznam.cz</a></p>
-                    <p><strong><i class="fa-solid fa-box-archive"></i> Datová schránka:</strong> <code style="background:#fff; padding:2px 6px; border-radius:4px; font-weight:bold; color:#1e3a8a;">r6hvbnt</code></p>
+                    <p><strong><i class="fa-regular fa-envelope"></i> Email:</strong> <a href="mailto:bytyjichova@seznam.cz" style="color:#0284c7; font-weight:600;">bytyjichova@seznam.cz</a>[cite: 2]</p>
+                    <p><strong><i class="fa-solid fa-box-archive"></i> Datová schránka:</strong> <code style="background:#fff; padding:2px 6px; border-radius:4px; font-weight:bold; color:#1e3a8a;">r6hvbnt</code>[cite: 2]</p>
                 </div>
 
                 <!-- Představenstvo -->
@@ -524,19 +524,19 @@
                 <div class="contact-box">
                     <div class="name">Ing. Iva Rangotisová</div>
                     <div class="role">předsedkyně představenstva</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:602322146">602 322 146</a></div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:602322146">602 322 146</a>[cite: 2]</div>
                 </div>
 
                 <div class="contact-box">
                     <div class="name">Olga Tajmrová</div>
                     <div class="role">místopředseda představenstva</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:773210264">773 210 264</a></div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:773210264">773 210 264</a>[cite: 2]</div>
                 </div>
 
                 <div class="contact-box">
                     <div class="name">Pavel Rybka</div>
                     <div class="role">člen představenstva</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:603445802">603 445 802</a></div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:603445802">603 445 802</a>[cite: 2]</div>
                 </div>
 
                 <!-- Kontrolní komise -->
@@ -545,382 +545,16 @@
                 <div class="contact-box">
                     <div class="name">Eva Ptáčková</div>
                     <div class="role">předsedkyně kontrolní komise</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:724222206">724 222 206</a></div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:724222206">724 222 206</a>[cite: 2]</div>
                 </div>
 
                 <div class="contact-box">
                     <div class="name">Vojtěch Mareš</div>
                     <div class="role">místopředseda kontrolní komise</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:608939382">608 939 382</a></div>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:608939382">608 939 382</a>[cite: 2]</div>
                 </div>
 
                 <div class="contact-box">
                     <div class="name">Petr Sochůrek</div>
                     <div class="role">člen kontrolní komise</div>
-                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:608815493">608 815 493</a></div>
-                </div>
-            </div>
-
-            <!-- Emergency Numbers -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Havarijní služby</h2>
-                </div>
-                <div class="emergency-item">
-                    <i class="fa-solid fa-bolt"></i>
-                    <div>
-                        <strong>Elektřina (Pohotovost)</strong>
-                        <p style="font-size:0.85rem; color:var(--text-muted)">800 850 860</p>
-                    </div>
-                </div>
-                <div class="emergency-item">
-                    <i class="fa-solid fa-droplet"></i>
-                    <div>
-                        <strong>Voda a Kanalizace</strong>
-                        <p style="font-size:0.85rem; color:var(--text-muted)">840 111 112</p>
-                    </div>
-                </div>
-                <div class="emergency-item">
-                    <i class="fa-solid fa-fire"></i>
-                    <div>
-                        <strong>Plyn - Havárie</strong>
-                        <p style="font-size:0.85rem; color:var(--text-muted)">1239</p>
-                    </div>
-                </div>
-                <div class="emergency-item">
-                    <i class="fa-solid fa-wrench"></i>
-                    <div>
-                        <strong>Výtah - Poruchy</strong>
-                        <p style="font-size:0.85rem; color:var(--text-muted)">800 100 200</p>
-                    </div>
-                </div>
-            </div>
-        </aside>
-    </div>
-
-    <!-- Modal Form for Adding/Editing Notice -->
-    <div class="modal" id="noticeModal">
-        <div class="modal-content">
-            <h3 style="margin-bottom: 1rem;" id="modalTitle">Nové oznámení</h3>
-            <form id="noticeForm" onsubmit="saveNotice(event)">
-                <input type="hidden" id="noticeId">
-                <div class="form-group">
-                    <label>Název oznámení</label>
-                    <input type="text" id="noticeTitle" class="form-control" required placeholder="Např. Odstávka teplé vody">
-                </div>
-                <div class="form-group">
-                    <label>Kategorie</label>
-                    <select id="noticeCategory" class="form-control">
-                        <option value="Informace">Informace</option>
-                        <option value="Důležité">Důležité</option>
-                        <option value="Havárie/Odstávka">Havárie/Odstávka</option>
-                        <option value="Plánované práce">Plánované práce</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Obsah zprávy</label>
-                    <textarea id="noticeBody" class="form-control" required placeholder="Zadejte podrobný text zprávy..."></textarea>
-                </div>
-                <div class="form-group" style="display: flex; gap: 0.5rem; align-items: center;">
-                    <input type="checkbox" id="noticePinned">
-                    <label for="noticePinned" style="margin: 0; cursor: pointer;">Přednostní zpráva (připnout nahoru)</label>
-                </div>
-                <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.5rem;">
-                    <button type="button" class="btn btn-secondary" onclick="closeNoticeModal()">Zrušit</button>
-                    <button type="submit" class="btn">Uložit a publikovat</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // Data Store & State Management
-        let isAdmin = false;
-        let currentFilter = 'all';
-        let inactivityTimer;
-
-        // Default initial data if localStorage is empty
-        const defaultNotices = [
-            {
-                id: "1",
-                title: "Odstávka teplé vody a topení",
-                category: "Havárie/Odstávka",
-                date: "24. 10. 2026",
-                body: "Z důvodu plánované opravy teplovodu dojde ve čtvrtek 29. 10. od 8:00 do 16:00 k odstávce teplé vody.\n\nDěkujeme za pochopení.",
-                pinned: true
-            },
-            {
-                id: "2",
-                title: "Čištění garáží a společných prostor",
-                category: "Plánované práce",
-                date: "15. 10. 2026",
-                body: "Prosíme všechny vlastníky vozidel, aby v sobotu 7. 11. přeparkovali svá vozidla z podzemních garáží z důvodu strojního čištění podlah.",
-                pinned: false
-            }
-        ];
-
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', () => {
-            if (!localStorage.getItem('byty_jichova_notices')) {
-                localStorage.setItem('byty_jichova_notices', JSON.stringify(defaultNotices));
-            }
-            if (!localStorage.getItem('byty_jichova_pass')) {
-                // Default password setup
-                localStorage.setItem('byty_jichova_pass', "admin123");
-            }
-            renderNotices();
-        });
-
-        // Authentication Handler
-        function toggleAuth() {
-            if (isAdmin) {
-                logout();
-            } else {
-                const pass = prompt("Zadejte přístupové heslo pro úpravu stránek:");
-                if (!pass) return;
-                
-                const storedPass = localStorage.getItem('byty_jichova_pass') || "admin123";
-                if (pass === storedPass) {
-                    isAdmin = true;
-                    updateAdminUI();
-                    resetInactivityTimer();
-                    alert("Byli jste úspěšně přihlášeni jako správce.");
-                } else {
-                    alert("Nesprávné heslo! Přístup odepřen.");
-                }
-            }
-        }
-
-        function logout() {
-            isAdmin = false;
-            clearTimeout(inactivityTimer);
-            updateAdminUI();
-            alert("Byli jste odhlášeni.");
-        }
-
-        function updateAdminUI() {
-            const statusDot = document.getElementById('statusDot');
-            const statusText = document.getElementById('statusText');
-            const authBtn = document.getElementById('authBtn');
-            const adminTools = document.getElementById('adminTools');
-
-            if (isAdmin) {
-                statusDot.classList.add('active');
-                statusText.innerText = 'Správce přihlášen';
-                authBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Odhlásit se';
-                adminTools.style.display = 'flex';
-            } else {
-                statusDot.classList.remove('active');
-                statusText.innerText = 'Režim pro veřejnost';
-                authBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Přihlášení správce';
-                adminTools.style.display = 'none';
-            }
-            renderNotices();
-        }
-
-        function resetInactivityTimer() {
-            if (!isAdmin) return;
-            clearTimeout(inactivityTimer);
-            // Auto logout after 15 minutes inactivity
-            inactivityTimer = setTimeout(() => {
-                alert("Byli jste automaticky odhlášeni z důvodu neaktivity.");
-                logout();
-            }, 15 * 60 * 1000);
-        }
-
-        document.addEventListener('mousemove', resetInactivityTimer);
-        document.addEventListener('keypress', resetInactivityTimer);
-
-        function changePassword() {
-            if (!isAdmin) return;
-            const newPass = prompt("Zadejte nové přístupové heslo správce:");
-            if (newPass && newPass.trim() !== "") {
-                localStorage.setItem('byty_jichova_pass', newPass.trim());
-                alert("Heslo bylo úspěšně změněno. Pro příští přihlášení použijte nové heslo.");
-            }
-        }
-
-        // Render Notices Board
-        function getNotices() {
-            return JSON.parse(localStorage.getItem('byty_jichova_notices') || '[]');
-        }
-
-        function setFilter(cat, btn) {
-            currentFilter = cat;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderNotices();
-        }
-
-        function renderNotices() {
-            const container = document.getElementById('noticesContainer');
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            let notices = getNotices();
-
-            // Filter
-            if (currentFilter !== 'all') {
-                notices = notices.filter(n => n.category === currentFilter);
-            }
-
-            // Search Filter
-            if (search) {
-                notices = notices.filter(n => n.title.toLowerCase().includes(search) || n.body.toLowerCase().includes(search));
-            }
-
-            // Sort: Pinned first
-            notices.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
-
-            if (notices.length === 0) {
-                container.innerHTML = `<div class="empty-state"><i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 0.5rem;"></i><p>Žádná oznámení neodpovídají zadání.</p></div>`;
-                return;
-            }
-
-            container.innerHTML = notices.map(n => {
-                let badgeClass = 'badge-general';
-                if (n.category === 'Havárie/Odstávka') badgeClass = 'badge-danger';
-                if (n.category === 'Důležité') badgeClass = 'badge-warning';
-                if (n.category === 'Plánované práce') badgeClass = 'badge-info';
-
-                return `
-                    <article class="notice-card ${n.pinned ? 'pinned' : ''}">
-                        <div class="notice-header">
-                            <h3 class="notice-title">
-                                ${n.pinned ? '<i class="fa-solid fa-thumbtack" style="color:var(--danger); margin-right:4px;"></i>' : ''}
-                                ${escapeHtml(n.title)}
-                            </h3>
-                            <span class="notice-badge ${badgeClass}">${escapeHtml(n.category)}</span>
-                        </div>
-                        <div class="notice-meta">
-                            <span><i class="fa-regular fa-calendar"></i> ${n.date}</span>
-                        </div>
-                        <div class="notice-body">${escapeHtml(n.body)}</div>
-                        ${isAdmin ? `
-                            <div class="notice-admin-actions">
-                                <button class="btn btn-sm btn-secondary" onclick="editNotice('${n.id}')"><i class="fa-solid fa-pen"></i> Upravit</button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteNotice('${n.id}')"><i class="fa-solid fa-trash"></i> Smazat</button>
-                            </div>
-                        ` : ''}
-                    </article>
-                `;
-            }).join('');
-        }
-
-        // CRUD Modal Operations
-        function openNoticeModal(editId = null) {
-            const modal = document.getElementById('noticeModal');
-            document.getElementById('noticeForm').reset();
-            document.getElementById('noticeId').value = '';
-
-            if (editId) {
-                const notice = getNotices().find(n => n.id === editId);
-                if (notice) {
-                    document.getElementById('modalTitle').innerText = 'Upravit oznámení';
-                    document.getElementById('noticeId').value = notice.id;
-                    document.getElementById('noticeTitle').value = notice.title;
-                    document.getElementById('noticeCategory').value = notice.category;
-                    document.getElementById('noticeBody').value = notice.body;
-                    document.getElementById('noticePinned').checked = !!notice.pinned;
-                }
-            } else {
-                document.getElementById('modalTitle').innerText = 'Nové oznámení';
-            }
-
-            modal.classList.add('active');
-        }
-
-        function closeNoticeModal() {
-            document.getElementById('noticeModal').classList.remove('active');
-        }
-
-        function saveNotice(e) {
-            e.preventDefault();
-            const id = document.getElementById('noticeId').value;
-            const title = document.getElementById('noticeTitle').value;
-            const category = document.getElementById('noticeCategory').value;
-            const body = document.getElementById('noticeBody').value;
-            const pinned = document.getElementById('noticePinned').checked;
-
-            let notices = getNotices();
-
-            if (id) {
-                // Update
-                notices = notices.map(n => n.id === id ? { ...n, title, category, body, pinned } : n);
-            } else {
-                // Create
-                const newNotice = {
-                    id: Date.now().toString(),
-                    title,
-                    category,
-                    date: new Date().toLocaleDateString('cs-CZ'),
-                    body,
-                    pinned
-                };
-                notices.unshift(newNotice);
-            }
-
-            localStorage.setItem('byty_jichova_notices', JSON.stringify(notices));
-            closeNoticeModal();
-            renderNotices();
-        }
-
-        function editNotice(id) {
-            openNoticeModal(id);
-        }
-
-        function deleteNotice(id) {
-            if (confirm("Opravdu chcete toto oznámení smazat?")) {
-                let notices = getNotices().filter(n => n.id !== id);
-                localStorage.setItem('byty_jichova_notices', JSON.stringify(notices));
-                renderNotices();
-            }
-        }
-
-        // Data Backup & Disaster Recovery (JSON Export/Import)
-        function exportData() {
-            const data = {
-                notices: getNotices(),
-                exportDate: new Date().toISOString()
-            };
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `byty_jichova_zaloha_${new Date().toISOString().slice(0,10)}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function importDataTrigger() {
-            document.getElementById('importFileInput').click();
-        }
-
-        function importData(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const imported = JSON.parse(e.target.result);
-                    if (imported && imported.notices && Array.isArray(imported.notices)) {
-                        localStorage.setItem('byty_jichova_notices', JSON.stringify(imported.notices));
-                        renderNotices();
-                        alert("Data byla úspěšně obnovena ze zálohy.");
-                    } else {
-                        alert("Neplatný formát záložního souboru!");
-                    }
-                } catch (err) {
-                    alert("Chyba při zpracování souboru: " + err.message);
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-    </script>
-</body>
-</html>
+                    <div class="phone"><i class="fa-solid fa-phone-flip"></i> <a href="tel:608815493">608 815 493</a>[cite: 2]</div>
